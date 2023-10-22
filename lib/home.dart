@@ -81,8 +81,6 @@ class HomeState extends State<Home> {
             ],
             onSelected: (value) async {
               if (value == "logout") {
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                prefs.remove("token");
                 _logout(token);
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     '/', (Route<dynamic> route) => false);
@@ -175,5 +173,7 @@ class HomeState extends State<Home> {
             'Bearer ${token}',
       },
     );
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("token");
   }
 }
